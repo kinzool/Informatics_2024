@@ -1,4 +1,4 @@
-package structures
+package lab7
 
 import "fmt"
 
@@ -15,7 +15,7 @@ func NewFurniture(name string, price float64, color string) *Furniture {
 	f := &Furniture{name: name, price: price, color: color}
 	return f
 }
-func (f *Furniture) SetPrice(newPrice float64) error {
+func (f *Furniture) setPrice(newPrice float64) error {
 	if newPrice < 0 {
 		return fmt.Errorf("заданная цена меньше нуля")
 	} else if newPrice == f.price {
@@ -26,7 +26,7 @@ func (f *Furniture) SetPrice(newPrice float64) error {
 	}
 }
 
-func (f *Furniture) ApplyDiscount(discount float64) error {
+func (f *Furniture) applyDiscount(discount float64) error {
 	if discount < 0 {
 		return fmt.Errorf("заданная скидка меньше нуля")
 	} else {
@@ -35,11 +35,11 @@ func (f *Furniture) ApplyDiscount(discount float64) error {
 	}
 }
 
-func (f *Furniture) GetPrice() float64 {
+func (f *Furniture) getPrice() float64 {
 	return f.price
 }
 
-func (f *Furniture) ChangeCharacteristics(name string, color string) error {
+func (f *Furniture) changeCharacteristics(name string, color string) error {
 	if name == f.name || color == f.color {
 		return fmt.Errorf("характеристики не поменялись")
 	} else {
@@ -49,6 +49,6 @@ func (f *Furniture) ChangeCharacteristics(name string, color string) error {
 	}
 }
 
-func (f *Furniture) PrintInformation() {
+func (f *Furniture) printInformation() {
 	fmt.Printf("name: %s, price: %.2f рублей, color: %s\n", f.name, f.price, f.color)
 }
