@@ -42,16 +42,6 @@ func (f *Furniture) getPrice() float64 {
 	return f.price
 }
 
-func (f *Furniture) changeCharacteristics(name string, color string) error {
-	if name == f.name || color == f.color {
-		return fmt.Errorf("характеристики не поменялись")
-	} else {
-		f.name = name
-		f.color = color
-		return nil
-	}
-}
-
 func (f *Furniture) printInformation() {
 	fmt.Printf("name: %s, price: %.2f рублей, color: %s\n", f.name, f.price, f.color)
 }
