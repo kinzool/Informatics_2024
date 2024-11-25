@@ -1,6 +1,8 @@
 package lab7
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Furniture struct {
 	name  string
@@ -29,10 +31,11 @@ func (f *Furniture) setPrice(newPrice float64) error {
 func (f *Furniture) applyDiscount(discount float64) error {
 	if discount < 0 {
 		return fmt.Errorf("заданная скидка меньше нуля")
-	} else {
-		f.price = f.price * (1 - (discount / 100))
-		return nil
+	} else if discount > 100 {
+		return fmt.Errorf("заданная скидка больше ста")
 	}
+	f.price = f.price * (1 - (discount / 100))
+	return nil
 }
 
 func (f *Furniture) getPrice() float64 {
@@ -51,4 +54,12 @@ func (f *Furniture) changeCharacteristics(name string, color string) error {
 
 func (f *Furniture) printInformation() {
 	fmt.Printf("name: %s, price: %.2f рублей, color: %s\n", f.name, f.price, f.color)
+}
+
+func (f *Furniture) ChangeFurnitureColor(newColor string) error {
+	if newColor == f.color {
+		return fmt.Errorf("цвет не изменился")
+	}
+	f.color = newColor
+	return nil
 }

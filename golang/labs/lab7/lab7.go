@@ -11,7 +11,6 @@ type Product interface {
 	applyDiscount(discount float64) error
 	setPrice(newPrice float64) error
 	getPrice() float64
-	changeCharacteristics(name string, color string) error
 	printInformation()
 }
 
@@ -39,7 +38,15 @@ func RunLab7() {
 	if err != nil {
 		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
 	}
-	err = product3.changeCharacteristics("Кровать", "Синий")
+	err = product3.ChangeFurnitureColor("Красный")
+	if err != nil {
+		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
+	}
+	err = product1.ChangeElectronicsModel("pro m2 512gb")
+	if err != nil {
+		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
+	}
+	err = product2.ChangeClothesSize("XL")
 	if err != nil {
 		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
 	}

@@ -30,6 +30,8 @@ func NewClothes(name string, price float64, color string, size string) *Clothes 
 func (c *Clothes) applyDiscount(discount float64) error {
 	if discount < 0 {
 		return fmt.Errorf("заданная скидка меньше нуля")
+	} else if discount > 100 {
+		return fmt.Errorf("заданная скидка больше ста")
 	}
 	c.price = c.price * (1 - (discount / 100))
 	return nil
@@ -39,14 +41,14 @@ func (c *Clothes) getPrice() float64 {
 	return c.price
 }
 
-func (c *Clothes) changeCharacteristics(name string, color string) error {
-	if name == c.name || color == c.color {
-		return fmt.Errorf("характеристики не поменялись")
+func (c *Clothes) ChangeClothesSize(newSize string) error {
+	if newSize == c.size {
+		return fmt.Errorf("размер не поменялся")
 	}
-	c.name = name
-	c.color = color
+	c.size = newSize
 	return nil
 }
+
 func (c *Clothes) printInformation() {
 	fmt.Printf("name: %s, price: %.2f рублей, color: %s\n, size: %s", c.name, c.price, c.color, c.size)
 }
