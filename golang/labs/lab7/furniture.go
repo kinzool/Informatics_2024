@@ -17,16 +17,6 @@ func NewFurniture(name string, price float64, color string) *Furniture {
 	f := &Furniture{name: name, price: price, color: color}
 	return f
 }
-func (f *Furniture) setPrice(newPrice float64) error {
-	if newPrice < 0 {
-		return fmt.Errorf("заданная цена меньше нуля")
-	} else if newPrice == f.price {
-		return fmt.Errorf("заданное значение равно исходному")
-	} else {
-		f.price = newPrice
-		return nil
-	}
-}
 
 func (f *Furniture) applyDiscount(discount float64) error {
 	if discount < 0 {

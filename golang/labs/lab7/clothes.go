@@ -9,16 +9,6 @@ type Clothes struct {
 	size  string
 }
 
-func (c *Clothes) setPrice(newPrice float64) error {
-	if newPrice < 0 {
-		return fmt.Errorf("заданная цена меньше нуля")
-	} else if newPrice == c.price {
-		return fmt.Errorf("заданное значение равно исходному")
-	}
-	c.price = newPrice
-	return nil
-}
-
 func NewClothes(name string, price float64, color string, size string) *Clothes {
 	if price <= 0 {
 		price = 1

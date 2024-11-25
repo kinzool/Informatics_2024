@@ -9,16 +9,6 @@ type Electronics struct {
 	color string
 }
 
-func (e *Electronics) setPrice(newPrice float64) error {
-	if newPrice < 0 {
-		return fmt.Errorf("заданная цена меньше нуля")
-	} else if newPrice == e.price {
-		return fmt.Errorf("заданное значение равно исходному")
-	}
-	e.price = newPrice
-	return nil
-}
-
 func NewElectronic(name string, price float64, model string, color string) *Electronics {
 	if price <= 0 {
 		price = 1
