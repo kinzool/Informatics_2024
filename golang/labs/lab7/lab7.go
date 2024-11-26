@@ -9,9 +9,7 @@ const ERRORPASTE = "Ошибка: "
 
 type Product interface {
 	applyDiscount(discount float64) error
-	setPrice(newPrice float64) error
 	getPrice() float64
-	changeCharacteristics(name string, color string) error
 	printInformation()
 }
 
@@ -21,6 +19,32 @@ func getSummaryAmount(products []Product) float64 {
 		summaryAmount += product.getPrice()
 	}
 	return summaryAmount
+}
+
+func setPrice(product interface{}, newPrice float64) error {
+	if newPrice < 0 {
+		return fmt.Errorf("заданная цена меньше нуля")
+	}
+	switch p := product.(type) {
+	case *Electronics:
+		if newPrice == p.price {
+			return fmt.Errorf("заданное значение равно исходному")
+		}
+		p.price = newPrice
+	case *Clothes:
+		if newPrice == p.price {
+			return fmt.Errorf("заданное значение равно исходному")
+		}
+		p.price = newPrice
+	case *Furniture:
+		if newPrice == p.price {
+			return fmt.Errorf("заданное значение равно исходному")
+		}
+		p.price = newPrice
+	default:
+		return fmt.Errorf("неизвестный тип продукта")
+	}
+	return nil
 }
 
 func RunLab7() {
@@ -35,15 +59,23 @@ func RunLab7() {
 		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
 	}
 	fmt.Printf("Цена первого товара после применения скидки: %.2f рублей\n", product1.getPrice())
-	err = product2.setPrice(2500)
+	err = setPrice(product2, 2500)
 	if err != nil {
 		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
 	}
-	err = product3.changeCharacteristics("Кровать", "Синий")
+	err = product3.ChangeFurnitureColor("Красный")
 	if err != nil {
 		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
 	}
-	err = product3.setPrice(27500)
+	err = product1.ChangeElectronicsModel("pro m2 512gb")
+	if err != nil {
+		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
+	}
+	err = product2.ChangeClothesSize("XL")
+	if err != nil {
+		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
+	}
+	err = setPrice(product3, 27500)
 	if err != nil {
 		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
 	}
