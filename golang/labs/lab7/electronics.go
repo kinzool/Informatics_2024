@@ -18,10 +18,9 @@ func NewElectronic(name string, price float64, model string, color string) *Elec
 }
 
 func (e *Electronics) applyDiscount(discount float64) error {
-	if discount < 0 {
-		return fmt.Errorf("заданная скидка меньше нуля")
-	} else if discount > 100 {
-		return fmt.Errorf("заданная скидка больше ста")
+	err := validateDiscount(discount)
+	if err != nil {
+		return err
 	}
 	e.price = e.price * (1 - (discount / 100))
 	return nil

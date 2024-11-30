@@ -21,14 +21,7 @@ func getSummaryAmount(products []Product) float64 {
 	}
 	return summaryAmount
 }
-func validatePrice(newPrice, currentPrice float64) error {
-	if newPrice < 0 {
-		return fmt.Errorf("заданная цена меньше нуля")
-	} else if newPrice == currentPrice {
-		return fmt.Errorf("заданное значение равно исходному")
-	}
-	return nil
-}
+
 func RunLab7() {
 	fmt.Println("--------------------------------------------------------------------------------------------------------------------------------------")
 	product1 := NewElectronic("Macbook", 52000, "air m1 256gb", "gray")

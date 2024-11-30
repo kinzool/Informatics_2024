@@ -18,10 +18,9 @@ func NewClothes(name string, price float64, color string, size string) *Clothes 
 }
 
 func (c *Clothes) applyDiscount(discount float64) error {
-	if discount < 0 {
-		return fmt.Errorf("заданная скидка меньше нуля")
-	} else if discount > 100 {
-		return fmt.Errorf("заданная скидка больше ста")
+	err := validateDiscount(discount)
+	if err != nil {
+		return err
 	}
 	c.price = c.price * (1 - (discount / 100))
 	return nil
