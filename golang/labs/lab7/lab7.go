@@ -9,6 +9,7 @@ const ERRORPASTE = "Ошибка: "
 
 type Product interface {
 	applyDiscount(discount float64) error
+	setPrice(newPrice float64) error
 	getPrice() float64
 	printInformation()
 }
@@ -20,33 +21,14 @@ func getSummaryAmount(products []Product) float64 {
 	}
 	return summaryAmount
 }
-
-func setPrice(product interface{}, newPrice float64) error {
+func validatePrice(newPrice, currentPrice float64) error {
 	if newPrice < 0 {
 		return fmt.Errorf("заданная цена меньше нуля")
-	}
-	switch p := product.(type) {
-	case *Electronics:
-		if newPrice == p.price {
-			return fmt.Errorf("заданное значение равно исходному")
-		}
-		p.price = newPrice
-	case *Clothes:
-		if newPrice == p.price {
-			return fmt.Errorf("заданное значение равно исходному")
-		}
-		p.price = newPrice
-	case *Furniture:
-		if newPrice == p.price {
-			return fmt.Errorf("заданное значение равно исходному")
-		}
-		p.price = newPrice
-	default:
-		return fmt.Errorf("неизвестный тип продукта")
+	} else if newPrice == currentPrice {
+		return fmt.Errorf("заданное значение равно исходному")
 	}
 	return nil
 }
-
 func RunLab7() {
 	fmt.Println("--------------------------------------------------------------------------------------------------------------------------------------")
 	product1 := NewElectronic("Macbook", 52000, "air m1 256gb", "gray")
@@ -59,7 +41,7 @@ func RunLab7() {
 		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
 	}
 	fmt.Printf("Цена первого товара после применения скидки: %.2f рублей\n", product1.getPrice())
-	err = setPrice(product2, 2500)
+	err = product2.setPrice(2500)
 	if err != nil {
 		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
 	}
@@ -75,7 +57,7 @@ func RunLab7() {
 	if err != nil {
 		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
 	}
-	err = setPrice(product3, 27500)
+	err = product3.setPrice(27500)
 	if err != nil {
 		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
 	}

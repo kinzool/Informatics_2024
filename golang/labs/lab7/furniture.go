@@ -28,6 +28,15 @@ func (f *Furniture) applyDiscount(discount float64) error {
 	return nil
 }
 
+func (f *Furniture) setPrice(newPrice float64) error {
+	err := validatePrice(newPrice, f.price)
+	if err != nil {
+		return err
+	}
+	f.price = newPrice
+	return nil
+}
+
 func (f *Furniture) getPrice() float64 {
 	return f.price
 }

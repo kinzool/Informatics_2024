@@ -27,6 +27,15 @@ func (e *Electronics) applyDiscount(discount float64) error {
 	return nil
 }
 
+func (e *Electronics) setPrice(newPrice float64) error {
+	err := validatePrice(newPrice, e.price)
+	if err != nil {
+		return err
+	}
+	e.price = newPrice
+	return nil
+}
+
 func (e *Electronics) getPrice() float64 {
 	return e.price
 }

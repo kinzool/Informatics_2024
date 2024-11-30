@@ -27,6 +27,12 @@ func (c *Clothes) applyDiscount(discount float64) error {
 	return nil
 }
 
+func (c *Clothes) setPrice(newPrice float64) error {
+	err := validatePrice(newPrice, c.price)
+	c.price = newPrice
+	return nil
+}
+
 func (c *Clothes) getPrice() float64 {
 	return c.price
 }
