@@ -31,28 +31,28 @@ func RunLab7() {
 	fmt.Printf("Цена до применения скидок: %.2f рублей\n", getSummaryAmount(productsBeforeDiscount))
 	err := product1.applyDiscount(20)
 	if err != nil {
-		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
+		log.Fatal(fmt.Errorf("применение скидки: %w", err))
 	}
 	fmt.Printf("Цена первого товара после применения скидки: %.2f рублей\n", product1.getPrice())
 	err = product2.setPrice(2500)
 	if err != nil {
-		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
+		log.Fatal(fmt.Errorf("попытка установить новую цену: %w", err))
 	}
 	err = product3.ChangeFurnitureColor("Красный")
 	if err != nil {
-		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
+		log.Fatal(fmt.Errorf("попытка поменять цвет фурнитуры: %w", err))
 	}
 	err = product1.ChangeElectronicsModel("pro m2 512gb")
 	if err != nil {
-		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
+		log.Fatal(fmt.Errorf("попытка поменять модель электроники: %w", err))
 	}
 	err = product2.ChangeClothesSize("XL")
 	if err != nil {
-		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
+		log.Fatal(fmt.Errorf("попытка поменять цвет одежды: %w", err))
 	}
 	err = product3.setPrice(27500)
 	if err != nil {
-		log.Fatal(fmt.Sprint(ERRORPASTE, err.Error()))
+		log.Fatal(fmt.Errorf("попытка установить новую цену: %w", err))
 	}
 	product3.printInformation()
 	productsAfterDiscount := []Product{product1, product2, product3}
