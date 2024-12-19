@@ -31,11 +31,13 @@ func (l *ToDoList) DeleteTask(index int, name string) (string, error) {
 func (l *ToDoList) MarkAsComplete(description string, name string) (string, error) {
 	for i := range l.Tasks {
 		if strings.Contains(l.Tasks[i].Description, description) {
+			descriptionForReturn := l.Tasks[i].Description
 			l.Tasks[i].Status = "выполнена"
-			return l.Tasks[i].Description, nil
+			WriteDataToFile(name, l)
+			l.DeleteTask(i, name)
+			return descriptionForReturn, nil
 		}
 	}
-	WriteDataToFile(name, l)
 	return "", fmt.Errorf("изменение статуса задачи: задачи, соответсвующей описанию, не существует")
 }
 
